@@ -39,11 +39,8 @@ async function getHotelByHotelId(ticketId: number, hotelId: number, userId: numb
   if(!includes.TicketType.includesHotel)throw unauthorizedError();
 
   const hotel = await hotelsRepository .findHotelByHotelId(hotelId);
-  if (!hotel) throw notFoundError();
-  const rooms = await hotelsRepository .findRoomsByHotelId(hotelId);
-  if (!rooms) throw notFoundError();
-
-  return [hotel, rooms];
+  if (!hotel|| hotel.length === 0) throw notFoundError();
+  return hotel;
 }
 
 const hotelsService = {

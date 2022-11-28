@@ -27,8 +27,11 @@ export async function getHotels(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function getHotelsByTicket(req: AuthenticatedRequest, res: Response) {
-  const ticketId = Number(req.query.ticketId);
   const hotelId = Number(req.params.hotelId);
+  const ticketId = Number(req.query.ticketId);
+  if (!ticketId) {
+    return res.sendStatus(httpStatus.BAD_REQUEST);
+  }
   const { userId } = req;
 
   try {

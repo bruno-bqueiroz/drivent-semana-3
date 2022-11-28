@@ -12,6 +12,42 @@ export async function createHotel() {
       image: "https://media-cdn.tripadvisor.com/media/photo-s/0a/01/4c/e3/maple-hotel.jpg"
     }
     ]
-    
+  });
+}
+
+export async function getHotel() {
+  return prisma.hotel.findMany();
+}
+
+export async function createRooms(hotel: any) {
+  return prisma.room.createMany({
+    data: [
+      {
+        name: "Quarto simples",
+        capacity: 1,
+        hotelId: hotel[0].id
+      },
+      {
+        name: "Quarto Duplo",
+        capacity: 2,
+        hotelId: hotel[0].id
+      },
+      {
+        name: "Quarto Familia",
+        capacity: 4,
+        hotelId: hotel[0].id
+      },
+      {
+        name: "Quarto simples",
+        capacity: 1,
+        hotelId: hotel[1].id
+      },
+      {
+        name: "Quarto Familia",
+        capacity: 4,
+        hotelId: hotel[1].id
+      },
+      
+    ]
   });
 }
