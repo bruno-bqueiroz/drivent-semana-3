@@ -175,9 +175,12 @@ describe("GET /hotels/:hotelId", () => {
       const ticket = await createTicket(enrollment.id, ticketType.id, TicketStatus.RESERVED);
   
       const response = await server.get(`/hotels/149?ticketId=${ticket.id}`).set("Authorization", `Bearer ${token}`);
-
+      
       expect(response.status).toEqual(httpStatus.OK);
-      expect(response.body).toMatchObject();
+      expect(response.body).toEqual(expect.arrayContaining([
+        expect.objectContaining({
+        })
+      ]));
     });
   });
 });
